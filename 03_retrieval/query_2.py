@@ -1,7 +1,7 @@
-from langchain.chat_models import ChatOpenAI  #← ChatOpenAIをインポート
+from langchain.chat_models import ChatOpenAI  #← ChatOpenAI 가져오기
 from langchain.embeddings import OpenAIEmbeddings
-from langchain.prompts import PromptTemplate  #← PromptTemplateをインポート
-from langchain.schema import HumanMessage  #← HumanMessageをインポート
+from langchain.prompts import PromptTemplate  #← PromptTemplate 가져오기
+from langchain.schema import HumanMessage  #← HumanMessage 가져오기
 from langchain.vectorstores import Chroma
 
 embeddings = OpenAIEmbeddings(
@@ -13,30 +13,30 @@ database = Chroma(
     embedding_function=embeddings
 )
 
-query = "飛行車の最高速度は？"
+query = "비행 자동차의 최고 속도는?"
 
 documents = database.similarity_search(query)
 
-documents_string = "" #← ドキュメントの内容を格納する変数を初期化
+documents_string = "" #← 문서 내용을 저장할 변수를 초기화
 
 for document in documents:
     documents_string += f"""
 ---------------------------
 {document.page_content}
-""" #← ドキュメントの内容を追加
+""" #← 문서 내용을 추가
 
-prompt = PromptTemplate( #← PromptTemplateを初期化
-    template="""文章を元に質問に答えてください。 
+prompt = PromptTemplate( #← PromptTemplate를 초기화
+    template="""문장을 바탕으로 질문에 답하세요.
 
-文章: 
+문장: 
 {document}
 
-質問: {query}
+질문: {query}
 """,
-    input_variables=["document","query"] #← 入力変数を指定
+    input_variables=["document","query"] #← 입력 변수를 지정
 )
 
-chat = ChatOpenAI( #← ChatOpenAIを初期化
+chat = ChatOpenAI( #← ChatOpenAI를 초기화
     model="gpt-3.5-turbo"
 )
 
