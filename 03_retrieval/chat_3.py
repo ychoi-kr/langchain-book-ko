@@ -15,56 +15,56 @@ embeddings = OpenAIEmbeddings(
 
 chat = ChatOpenAI(model="gpt-3.5-turbo")
 
-prompt = PromptTemplate(template="""文章を元に質問に答えてください。 
+prompt = PromptTemplate(template="""문장을 기반으로 질문에 답하세요. 
 
-文章: 
+문장: 
 {document}
 
-質問: {query}
+질문: {query}
 """, input_variables=["document", "query"])
 
 text_splitter = SpacyTextSplitter(chunk_size=300, pipeline="ja_core_news_sm")
 
 @cl.on_chat_start
 async def on_chat_start():
-    files = None #← ファイルが選択されているか確認する変数
+    files = None #← 파일이 선택되어 있는지 확인하는 변수
 
-    while files is None: #← ファイルが選択されるまで繰り返す
+    while files is None: #← 파일이 선택될 때까지 반복
         files = await cl.AskFileMessage(
             max_size_mb=20,
-            content="PDFを選択してください",
+            content="PDF를 선택해 주세요",
             accept=["application/pdf"],
             raise_on_timeout=False,
         ).send()
     file = files[0]
 
-    if not os.path.exists("tmp"): #← tmpディレクトリが存在するか確認
-        os.mkdir("tmp") #← 存在しなければ作成する
-    with open(f"tmp/{file.name}", "wb") as f: #← PDFファイルを保存する
-        f.write(file.content) #← ファイルの内容を書き込む
+    if not os.path.exists("tmp"): #← tmp 디렉터리가 존재하는지 확인
+        os.mkdir("tmp") #← 존재하지 않으면 생성
+    with open(f"tmp/{file.name}", "wb") as f: #← PDF 파일을 저장
+        f.write(file.content) #← 파일 내용을 작성
 
-    documents = PyMuPDFLoader(f"tmp/{file.name}").load() #← 保存したPDFファイルを読み込む
-    splitted_documents = text_splitter.split_documents(documents) #← ドキュメントを分割する
+    documents = PyMuPDFLoader(f"tmp/{file.name}").load() #← 저장한 PDF 파일을 로드
+    splitted_documents = text_splitter.split_documents(documents) #← 문서를 분할
 
-    database = Chroma( #← データベースを初期化する
+    database = Chroma( #← 데이터베이스 초기화
         embedding_function=embeddings,
-        # 今回はpersist_directoryを指定しないことでデータベースの永続化を行わない
+        # 이번에는 persist_directory를 지정하지 않음으로써 데이터베이스 영속화를 하지 않음
     )
 
-    database.add_documents(splitted_documents) #← ドキュメントをデータベースに追加する
+    database.add_documents(splitted_documents) #← 문서를 데이터베이스에 추가
 
-    cl.user_session.set(  #← データベースをセッションに保存する
-        "database",  #← セッションに保存する名前
-        database  #← セッションに保存する値
+    cl.user_session.set(  #← 데이터베이스를 세션에 저장
+        "database",  #← 세션에 저장할 이름
+        database  #← 세션에 저장할 값
     )
 
-    await cl.Message(content=f"`{file.name}`の読み込みが完了しました。質問を入力してください。").send() #← 読み込み完了を通知する
+    await cl.Message(content=f"`{file.name}` 로딩이 완료되었습니다. 질문을 입력하세요.").send() #← 불러오기 완료를 알림
 
 @cl.on_message
 async def on_message(input_message):
-    print("入力されたメッセージ: " + input_message)
+    print("입력된 메시지: " + input_message)
 
-    database = cl.user_session.get("database") #← セッションからデータベースを取得する
+    database = cl.user_session.get("database") #← 세션에서 데이터베이스를 가져옴
 
     documents = database.similarity_search(input_message)
 
@@ -78,6 +78,6 @@ async def on_message(input_message):
 
     result = chat([
         HumanMessage(content=prompt.format(documents=documents_string,
-                                           query=input_message)) #← input_messageに変更
+                                           query=input_message)) #← input_message로 변경
     ])
     await cl.Message(content=result.content).send()
