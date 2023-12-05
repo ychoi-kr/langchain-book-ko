@@ -4,27 +4,27 @@ from langchain.retrievers import WikipediaRetriever
 
 chat = ChatOpenAI()
 
-retriever = WikipediaRetriever(  #← WikipediaRetrieverを初期化する
-    lang="ja",  #← Wikipediaの言語を指定する
-    doc_content_chars_max=500,  #← 取得するテキストの最大文字数を指定する
-    top_k_results=2,  #← 検索結果の上位何件を取得するかを指定する
+retriever = WikipediaRetriever(  #← WikipediaRetriever를 초기화
+    lang="ko",  #← Wikipedia의 언어를 지정
+    doc_content_chars_max=500,  #← 검색할 텍스트의 최대 글자수를 지정
+    top_k_results=2,  #← 검색 결과 중 상위 몇 건을 가져올지 지정
 )
 
-chain = RetrievalQA.from_llm( #← RetrievalQAを初期化する
-    llm=chat, #← 使用するChat modelsを指定する
-    retriever=retriever, #← 使用するRetrieverを指定する
-    return_source_documents=True, #← 情報の取得元のドキュメントを返すようにする
+chain = RetrievalQA.from_llm( #← RetrievalQA를 초기화
+    llm=chat, #← 사용할 Chat models를 지정
+    retriever=retriever, #← 사용할 Retriever를 지정
+    return_source_documents=True, #← 정보를 가져온 원본 문서를 반환
 )
 
-result = chain("バーボンウイスキーとは？") #← RetrievalQAを実行する
+result = chain("버번 위스키란?") #← RetrievalQA르 실행
 
-source_documents = result["source_documents"] #← 情報の取得元のドキュメントを取得する
+source_documents = result["source_documents"] #← 정보 출처의 문서를 가져옴
 
-print(f"検索結果: {len(source_documents)}件") #← 検索結果の件数を表示する
+print(f"검색 결과: {len(source_documents)}건") #← 검색 결과 건수를 표시
 for document in source_documents:
-    print("---------------取得したメタデータ---------------")
+    print("---------------검색한 메타데이터---------------")
     print(document.metadata)
-    print("---------------取得したテキスト---------------")
+    print("---------------검색한 텍스트---------------")
     print(document.page_content[:100])
-print("---------------返答---------------")
-print(result["result"]) #← 返答を表示する
+print("---------------응답---------------")
+print(result["result"]) #← 응답을 표시
