@@ -11,7 +11,7 @@ embeddings = OpenAIEmbeddings(
 
 chat = ChatOpenAI(model="gpt-3.5-turbo")
 
-prompt = PromptTemplate(template="""문장을 기반으로 질문에 답하세요.
+prompt = PromptTemplate(template="""문장을 바탕으로 질문에 답하세요.
 
 문장: 
 {document}
