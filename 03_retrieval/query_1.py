@@ -10,8 +10,8 @@ database = Chroma(
     embedding_function=embeddings
 )
 
-documents = database.similarity_search("飛行車の最高速度は？") #← データベースから類似度の高いドキュメントを取得
-print(f"ドキュメントの数: {len(documents)}") #← ドキュメントの数を表示
+documents = database.similarity_search("비행 자동차의 최고 속도는?") #← 데이터베이스에서 유사도가 높은 문서를 가져옴
+print(f"문서 개수: {len(documents)}") #← 문서 개수 표시
 
 for document in documents:
-    print(f"ドキュメントの内容: {document.page_content}") #← ドキュメントの内容を表示
+    print(f"문서 내용: {document.page_content}") #← 문서 내용을 표시
