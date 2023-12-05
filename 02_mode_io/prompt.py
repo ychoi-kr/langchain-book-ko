@@ -1,9 +1,9 @@
-from langchain import PromptTemplate  #← PromptTemplateをインポート
+from langchain import PromptTemplate  #← PromptTemplate 가져오기
 
-prompt = PromptTemplate(  #← PromptTemplateを初期化する
-    template="{product}はどこの会社が開発した製品ですか？",  #← {product}という変数を含むプロンプトを作成する
+prompt = PromptTemplate(  #← PromptTemplate 초기화하기
+    template="{product}는 어느 회사에서 개발한 제품인가요？",  #← {product}라는 변수를 포함하는 프롬프트 작성하기
     input_variables=[
-        "product"  #← productに入力する変数を指定する
+        "product"  #← product에 입력할 변수 지정
     ]
 )
 
