@@ -11,12 +11,12 @@ embeddings = OpenAIEmbeddings(
 
 chat = ChatOpenAI(model="gpt-3.5-turbo")
 
-prompt = PromptTemplate(template="""文章を元に質問に答えてください。 
+prompt = PromptTemplate(template="""문장을 기반으로 질문에 답하세요.
 
-文章: 
+문장: 
 {document}
 
-質問: {query}
+질문: {query}
 """, input_variables=["document", "query"])
 
 database = Chroma(
@@ -26,12 +26,12 @@ database = Chroma(
 
 @cl.on_chat_start
 async def on_chat_start():
-    await cl.Message(content="準備ができました！メッセージを入力してください！").send()
+    await cl.Message(content="준비되었습니다! 메시지를 입력하세요!").send()
 
 @cl.on_message
 async def on_message(input_message):
-    print("入力されたメッセージ: " + input_message)
-    documents = database.similarity_search(input_message) #← input_messageに変更
+    print("입력된 메시지: " + input_message)
+    documents = database.similarity_search(input_message) #← input_message로 변경
 
     documents_string = ""
 
@@ -43,6 +43,6 @@ async def on_message(input_message):
 
     result = chat([
         HumanMessage(content=prompt.format(document=documents_string,
-                                           query=input_message)) #← input_messageに変更
+                                           query=input_message)) #← input_message로 변경
     ])
-    await cl.Message(content=result.content).send() #← チャットボットからの返答を送信する
+    await cl.Message(content=result.content).send() #← 챗봇의 답변을 보냄
