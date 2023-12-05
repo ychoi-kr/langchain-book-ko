@@ -1,13 +1,13 @@
 import json
 import openai
 
-response = openai.Completion.create(  #←ChatCompletionではなく、Completionを使っている
-    engine="gpt-3.5-turbo-instruct",  #←modelではなくengineを指定し、gpt-3.5-turbo-instructを指定
-    prompt="今日の天気がとても良くて、気分が",  #←promptを指定
-    stop="。",  #←文字が出現したら文章を終了する
-    max_tokens=100,  #←最大のトークン数
-    n=2,  #←生成する文章の数
-    temperature=0.5  #←多様性を表すパラメータ
+response = openai.Completion.create(  #←ChatCompletion 대신 Completion을 사용하고 있습니다.
+    engine="gpt-3.5-turbo-instruct",  #←model 대신 engine을 지정하고 gpt-3.5-turbo-instruct를 지정
+    prompt="오늘 날씨가 매우 좋고 기분이",  #←prompt를 지정
+    stop=".",  #←문자가 나타나면 문장 종료
+    max_tokens=100,  #← 최대 토큰 수
+    n=2,  #← 생성할 문장 수
+    temperature=0.5  #←다양성을 나타내는 파라미터
 )
 
 print(json.dumps(response, indent=2, ensure_ascii=False))
