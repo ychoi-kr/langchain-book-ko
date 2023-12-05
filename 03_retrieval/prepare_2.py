@@ -1,14 +1,14 @@
 from langchain.document_loaders import PyMuPDFLoader
-from langchain.text_splitter import SpacyTextSplitter  #← SpacyTextSplitterをインポート
+from langchain.text_splitter import SpacyTextSplitter  #← SpacyTextSplitter를 가져옴
 
 loader = PyMuPDFLoader("./sample.pdf")
 documents = loader.load()
 
-text_splitter = SpacyTextSplitter(  #← SpacyTextSplitterを初期化する
-    chunk_size=300,  #← 分割するサイズを設定
-    pipeline="ja_core_news_sm"  #← 分割に使用する言語モデルを設定
+text_splitter = SpacyTextSplitter(  #← SpacyTextSplitter를 초기화
+    chunk_size=300,  #← 분할할 크기를 설정
+    pipeline="ja_core_news_sm"  #← 분할에 사용할 언어 모델을 설정
 )
-splitted_documents = text_splitter.split_documents(documents) #← ドキュメントを分割する
+splitted_documents = text_splitter.split_documents(documents) #← 문서를 분할
 
-print(f"分割前のドキュメント数: {len(documents)}")
-print(f"分割後のドキュメント数: {len(splitted_documents)}")
+print(f"분할 전 문서 개수: {len(documents)}")
+print(f"분할 후 문서 개수: {len(splitted_documents)}")
