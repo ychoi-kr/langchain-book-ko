@@ -1,29 +1,29 @@
 from langchain.chat_models import ChatOpenAI
-from langchain.retrievers import WikipediaRetriever, RePhraseQueryRetriever #← RePhraseQueryRetrieverをインポートする
+from langchain.retrievers import WikipediaRetriever, RePhraseQueryRetriever #← RePhraseQueryRetriever를 가져오기
 from langchain import LLMChain
 from langchain.prompts import PromptTemplate
 
 retriever = WikipediaRetriever( 
-    lang="ja", 
+    lang="ko", 
     doc_content_chars_max=500 
 )
 
-llm_chain = LLMChain( #← LLMChainを初期化する
-    llm = ChatOpenAI( #← ChatOpenAIを指定する
+llm_chain = LLMChain( #← LLMChain을 초기화
+    llm = ChatOpenAI( #← ChatOpenAI를 지정
         temperature = 0
     ), 
-    prompt= PromptTemplate( #← PromptTemplateを指定する
+    prompt= PromptTemplate( #← PromptTemplate을 지정
         input_variables=["question"],
-        template="""以下の質問からWikipediaで検索するべきキーワードを抽出してください。
-質問: {question}
+        template="""아래 질문에서 위키백과에서 검색할 키워드를 추출해 주세요.
+질문: {question}
 """
 ))
 
-re_phrase_query_retriever = RePhraseQueryRetriever( #← RePhraseQueryRetrieverを初期化する
-    llm_chain=llm_chain, #← LLMChainを指定する
-    retriever=retriever, #← WikipediaRetrieverを指定する
+re_phrase_query_retriever = RePhraseQueryRetriever( #← RePhraseQueryRetriever를 초기화
+    llm_chain=llm_chain, #← LLMChain을 지정
+    retriever=retriever, #← WikipediaRetriever를 지정
 )
 
-documents = re_phrase_query_retriever.get_relevant_documents("私はラーメンが好きです。ところでバーボンウイスキーとは何ですか？")
+documents = re_phrase_query_retriever.get_relevant_documents("나는 라면을 좋아합니다. 그런데 버번 위스키란 무엇인가요?")
 
 print(documents)
