@@ -1,8 +1,8 @@
 from langchain.document_loaders import PyMuPDFLoader
 
-loader = PyMuPDFLoader("./sample.pdf") #← sample.pdfを読み込む
+loader = PyMuPDFLoader("./sample.pdf") #← sample.pdf 로드
 documents = loader.load()
 
-print(f"ドキュメントの数: {len(documents)}") #← ドキュメントの数を確認する
-print(f"1つめのドキュメントの内容: {documents[0].page_content}") #← 1つめのドキュメントの内容を確認する
-print(f"1つめのドキュメントのメタデータ: {documents[0].metadata}") #← 1つめのドキュメントのメタデータを確認する
+print(f"문서 개수: {len(documents)}") #← 문서 개수 확인
+print(f"첫 번째 문서의 내용: {documents[0].page_content}") #← 첫 번째 문서의 내용을 확인
+print(f"첫 번째 문서의 메타데이터: {documents[0].metadata}") #← 첫 번째 문서의 메타데이터를 확인
