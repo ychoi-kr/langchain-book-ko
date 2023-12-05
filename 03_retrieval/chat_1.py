@@ -1,11 +1,11 @@
 import chainlit as cl
 
 
-@cl.on_chat_start #← チャットが開始されたときに実行される関数を定義する
+@cl.on_chat_start #← 채팅이 시작될 때 실행할 함수를 정의
 async def on_chat_start():
-    await cl.Message(content="準備ができました！メッセージを入力してください！").send() #← 初期表示されるメッセージを送信する
+    await cl.Message(content="준비되었습니다! 메시지를 입력하세요!").send() #← 초기에 표시할 메시지를 보냄
 
-@cl.on_message #← メッセージが送信されたときに実行される関数を定義する
+@cl.on_message #← 메시지를 보낼 때 실행할 함수를 정의
 async def on_message(input_message):
-    print("入力されたメッセージ: " + input_message)
-    await cl.Message(content="こんにちは!").send() #← チャットボットからの返答を送信する
+    print("입력된 메시지: " + input_message)
+    await cl.Message(content="안녕하세요!").send() #← 챗봇의 답변을 보냄
