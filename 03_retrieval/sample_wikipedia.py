@@ -1,16 +1,16 @@
 from langchain.retrievers import WikipediaRetriever
 
-retriever = WikipediaRetriever(  #← WikipediaRetrieverを初期化する
-    lang="ja",  #← Wikipediaの言語を指定する
+retriever = WikipediaRetriever(  #← WikipediaRetriever를 초기화
+    lang="ko",  #← Wikipedia의 언어를 지정
 )
-documents = retriever.get_relevant_documents( #← Wikipediaから関連する記事を取得する
-    "大規模言語モデル" #← 検索するキーワードを指定する
+documents = retriever.get_relevant_documents( #← Wikipedia에서 관련 문서를 가져옴
+    "대규모 언어 모델" #← 검색할 키워드를 지정
 )
 
-print(f"検索結果: {len(documents)}件") #← 検索結果の件数を表示する
+print(f"검색 결과: {len(documents)}件") #← 검색 결과 건수를 표시
 
 for document in documents:
-    print("---------------取得したメタデータ---------------")
-    print(document.metadata) #← メタデータを表示する
-    print("---------------取得したテキスト---------------")
-    print(document.page_content[:100]) #← テキストの先頭100文字を表示する
+    print("---------------검색한 메타데이터---------------")
+    print(document.metadata) #← 메타데이터를 표시
+    print("---------------검색한 텍스트---------------")
+    print(document.page_content[:100]) #← 텍스트의 첫 100글자를 표시
