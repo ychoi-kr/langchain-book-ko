@@ -25,7 +25,7 @@ async def on_chat_start():
 async def on_message(message: str):
     messages = chain.memory.load_memory_variables({})["history"] # 저장된 메시지 가져오기
 
-    print(f"保存されているメッセージの数: {len(messages)}" # 저장된 메시지 개수를 표시
+    print(f"저장된 메시지 개수: {len(messages)}" # 저장된 메시지 개수를 표시
           )
 
     for saved_message in messages: # 저장된 메시지를 1개씩 불러옴
