@@ -26,6 +26,6 @@ agent = initialize_agent(
     verbose=True
 )
 
-result = agent.run("제주도 특산품을 검색해 result.txt 파일에 한국어로 저장하세요.") #←실행 결과를 파일에 저장하도록 지시
+result = agent.run("경주시의 특산물을 검색해 result.txt 파일에 한국어로 저장하세요.") #←실행 결과를 파일에 저장하도록 지시
 
 print(f"실행 결과: {result}")
