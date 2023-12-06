@@ -19,7 +19,7 @@ llm_chain = LLMChain(
 )
 
 chain = LLMRequestsChain(  #← LLMRequestsChain을 초기화
-    llm_chain=llm_chain,  #← llm_chainにはLLMChain을 지정
+    llm_chain=llm_chain,  #← llm_chain에 LLMChain을 지정
 )
 
 print(chain({
