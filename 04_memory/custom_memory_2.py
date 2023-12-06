@@ -11,8 +11,8 @@ chat = ChatOpenAI(
     model="gpt-3.5-turbo"
 )
 
-memory = ConversationSummaryMemory(  #← ConversationSummaryMemoryを使用するように変更
-    llm=chat,  #← Chat modelsを指定する
+memory = ConversationSummaryMemory(  #← ConversationSummaryMemory를 사용하도록 변경
+    llm=chat,  #← Chat models를 지정
     return_messages=True,
 )
 
@@ -23,17 +23,17 @@ chain = ConversationChain(
 
 @cl.on_chat_start
 async def on_chat_start():
-    await cl.Message(content="私は会話の文脈を考慮した返答をできるチャットボットです。メッセージを入力してください。").send()
+    await cl.Message(content="저는 대화의 맥락을 고려해 답변할 수 있는 채팅봇입니다. 메시지를 입력하세요.").send()
 
 @cl.on_message
 async def on_message(message: str):
-    messages = chain.memory.load_memory_variables({})["history"] # 保存されているメッセージを取得する
+    messages = chain.memory.load_memory_variables({})["history"] # 저장된 메시지 가져오기
 
-    print(f"保存されているメッセージの数: {len(messages)}" # 保存されているメッセージの数を表示する
+    print(f"저장된 메시지 개수: {len(messages)}" # 저장된 메시지 개수를 표시
           )
 
-    for saved_message in messages: # 保存されているメッセージを1つずつ取り出す
-        print(saved_message.content # 保存されているメッセージを表示する
+    for saved_message in messages: # 저장된 메시지를 1개씩 불러옴
+        print(saved_message.content # 저장된 메시지를 표시
               )
 
     result = chain(message)
