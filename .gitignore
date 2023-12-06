@@ -1,0 +1,4 @@
+.chainlit/
+04_memory/.chainlit/
+04_memory/__pycache__/
+04_memory/chainlit.md
