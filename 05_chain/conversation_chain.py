@@ -6,7 +6,7 @@ chat = ChatOpenAI()
 
 memory = ConversationBufferMemory(return_messages=True)
 
-chain = ConversationChain( #← ConversationChainを初期化
-    memory=memory, #← Memoryモジュールを指定
-    llm=chat, #← 言語モデルを指定
+chain = ConversationChain( #← ConversationChain을 초기화
+    memory=memory, #← Memory 모듈을 지정
+    llm=chat, #← 언어 모델을 지정
 )
