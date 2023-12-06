@@ -1,4 +1,4 @@
-from langchain import LLMChain, PromptTemplate  #← LLMChainをインポート
+from langchain import LLMChain, PromptTemplate  #← LLMChain 가져오기
 from langchain.chat_models import ChatOpenAI
 
 chat = ChatOpenAI(  
@@ -6,17 +6,17 @@ chat = ChatOpenAI(
 )
 
 prompt = PromptTemplate(  
-    template="{product}はどこの会社が開発した製品ですか？",  
+    template="{product}는 어느 회사에서 개발한 제품인가요?",  
     input_variables=[
         "product"  
     ]
 )
 
-chain = LLMChain( #← LLMChainを作成する
+chain = LLMChain( #← LLMChain을 생성
     llm=chat,
     prompt=prompt,
 )
 
-result = chain.predict(product="iPhone") #← LLMChainを実行する
+result = chain.predict(product="iPhone") #← LLMChain을 실행
 
 print(result)
