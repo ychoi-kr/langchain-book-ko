@@ -7,7 +7,7 @@ chat = ChatOpenAI(
 
 result = chat( 
     [
-        HumanMessage(content="茶碗蒸しを作るのに必要な食材を教えて"),
+        HumanMessage(content="계란찜을 만드는 재료를 알려주세요"),
     ]
 )
 print(result.content)
