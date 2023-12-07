@@ -17,14 +17,14 @@ agent = initialize_agent(tools=tools, llm=chat, agent=AgentType.CHAT_ZERO_SHOT_R
 
 @cl.on_chat_start
 async def on_chat_start():
-    await cl.Message(content="Agentの初期化が完了しました").send() 
+    await cl.Message(content="Agent 초기화 완료").send() 
 
 @cl.on_message
 async def on_message(input_message):
-    result = agent.run( #← Agentを実行する
-        input_message, #← 入力メッセージ
-        callbacks=[ #← コールバックを指定
-            cl.LangchainCallbackHandler() #← chainlitに用意されているCallbacksを指定
+    result = agent.run( #← Agent를 실행
+        input_message, #← 입력 메시지
+        callbacks=[ #← 콜백을 지정
+            cl.LangchainCallbackHandler() #← chainlit에 준비된 Callbacks를 지정
         ]
     )
     await cl.Message(content=result).send()
