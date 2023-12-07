@@ -1,6 +1,7 @@
 .chainlit/
+*/__pycache__/
 04_memory/.chainlit/
-04_memory/__pycache__/
 04_memory/chainlit.md
 06_agent/result.txt
 06_agent/random.txt
+07_callback/chainlit.md
