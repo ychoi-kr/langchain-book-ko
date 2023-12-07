@@ -1,7 +1,7 @@
 from langchain.agents import AgentType, Tool, initialize_agent
-from langchain.agents.agent_toolkits import create_retriever_tool  #← create_retriever_toolをインポート
+from langchain.agents.agent_toolkits import create_retriever_tool  #← create_retriever_tool을 가져오기
 from langchain.chat_models import ChatOpenAI
-from langchain.retrievers import WikipediaRetriever #←WikipediaRetrieverをインポート
+from langchain.retrievers import WikipediaRetriever #←WikipediaRetriever를 가져오기
 from langchain.tools import WriteFileTool
 
 chat = ChatOpenAI(
@@ -15,17 +15,17 @@ tools.append(WriteFileTool(
     root_dir="./"
 ))
 
-retriever = WikipediaRetriever( #←WikipediaRetrieverを初期化
-    lang="ja", #←言語を日本語に設定
-    doc_content_chars_max=500,  #←記事の最大文字数を500文字に設定
-    top_k_results=1 #←検索結果の上位1件を取得
+retriever = WikipediaRetriever( #←WikipediaRetriever를 초기화
+    lang="ko", #←언어를 한국어로 설정
+    doc_content_chars_max=500,  #←글의 최대 글자 수를 500자로 설정
+    top_k_results=1 #←검색 결과 중 상위 1건을 가져옴
 )
 
 tools.append(
-    create_retriever_tool(  #←Retrieversを使用するToolを作成
-        name="WikipediaRetriever",  #←Toolの名前
-        description="受け取った単語に関するWikipediaの記事を取得できる",  #←Toolの説明
-        retriever=retriever,  #←Retrieversを指定
+    create_retriever_tool(  #←Retrievers를 사용하는 Tool을 생성
+        name="WikipediaRetriever",  #←Tool 이름
+        description="받은 단어에 대한 Wikipedia 기사를 검색할 수 있다",  #←Tool 설명
+        retriever=retriever,  #←Retrievers를 지정
     )
 )
 
@@ -36,6 +36,6 @@ agent = initialize_agent(
     verbose=True
 )
 
-result = agent.run("スコッチウイスキーについてWikipediaで調べて概要を日本語でresult.txtというファイルに保存してください。")
+result = agent.run("스카치 위스키에 대해 Wikipedia에서 찾아보고 그 개요를 한국어로 result.txt 파일에 저장하세요.")
 
-print(f"実行結果: {result}")
+print(f"실행 결과: {result}")
