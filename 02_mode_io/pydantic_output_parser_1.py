@@ -27,3 +27,6 @@ result = chat([ #← Chat models에 HumanMessage를 전달해 문장을 생성
 parsed_result = parser.parse(result.content) #← PydanticOutputParser를 사용해 문장을 파싱
 
 print(f"모델명: {parsed_result.model_name}")
+print(f"화면 크기: {parsed_result.screen_inches}인치")
+print(f"OS: {parsed_result.os_installed}")
+print(f"스마트폰 출시일: {parsed_result.release_date}")
