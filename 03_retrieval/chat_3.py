@@ -23,7 +23,7 @@ prompt = PromptTemplate(template="""문장을 기반으로 질문에 답하세�
 질문: {query}
 """, input_variables=["document", "query"])
 
-text_splitter = SpacyTextSplitter(chunk_size=300, pipeline="ja_core_news_sm")
+text_splitter = SpacyTextSplitter(chunk_size=300, pipeline="ko_core_news_sm")
 
 @cl.on_chat_start
 async def on_chat_start():
@@ -75,9 +75,9 @@ async def on_message(input_message):
     ---------------------------
     {document.page_content}
     """
-
+    
     result = chat([
-        HumanMessage(content=prompt.format(documents=documents_string,
+        HumanMessage(content=prompt.format(document=documents_string,
                                            query=input_message)) #← input_message로 변경
     ])
     await cl.Message(content=result.content).send()
