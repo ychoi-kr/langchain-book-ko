@@ -8,7 +8,7 @@ documents = loader.load()
 
 text_splitter = SpacyTextSplitter(
     chunk_size=300, 
-    pipeline="ja_core_news_sm"
+    pipeline="ko_core_news_sm"
 )
 splitted_documents = text_splitter.split_documents(documents)
 
