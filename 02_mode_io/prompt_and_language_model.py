@@ -15,7 +15,7 @@ prompt = PromptTemplate(  #← PromptTemplate을 작성
 
 result = chat( #← 실행
     [
-        HumanMessage(content=prompt.format(product="iPhone")),
+        HumanMessage(content=prompt.format(product="아이폰")),
     ]
 )
 print(result.content)

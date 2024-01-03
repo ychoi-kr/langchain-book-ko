@@ -7,5 +7,5 @@ prompt = PromptTemplate(  #← PromptTemplate 초기화하기
     ]
 )
 
-print(prompt.format(product="iPhone"))
-print(prompt.format(product="Xperia"))
+print(prompt.format(product="아이폰"))
+print(prompt.format(product="갤럭시"))

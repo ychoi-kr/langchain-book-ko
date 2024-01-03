@@ -6,6 +6,6 @@ retriever = WikipediaRetriever(
     top_k_results=1
 )
 documents = retriever.get_relevant_documents( 
-    "나는 라면을 좋아합니다. 그런데 버번 위스키란 무엇인가요?" 
+    "나는 라면을 좋아합니다. 그런데 소주란 무엇인가요?"
 )
 print(documents)

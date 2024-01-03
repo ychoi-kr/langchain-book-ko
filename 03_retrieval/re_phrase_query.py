@@ -14,7 +14,7 @@ llm_chain = LLMChain( #← LLMChain을 초기화
     ), 
     prompt= PromptTemplate( #← PromptTemplate을 지정
         input_variables=["question"],
-        template="""아래 질문에서 위키백과에서 검색할 키워드를 추출해 주세요.
+        template="""아래 질문에서 Wikipedia에서 검색할 키워드를 추출해 주세요.
 질문: {question}
 """
 ))
@@ -24,6 +24,6 @@ re_phrase_query_retriever = RePhraseQueryRetriever( #← RePhraseQueryRetriever�
     retriever=retriever, #← WikipediaRetriever를 지정
 )
 
-documents = re_phrase_query_retriever.get_relevant_documents("나는 라면을 좋아합니다. 그런데 버번 위스키란 무엇인가요?")
+documents = re_phrase_query_retriever.get_relevant_documents("나는 라면을 좋아합니다. 그런데 소주란 무엇인가요?")
 
 print(documents)
